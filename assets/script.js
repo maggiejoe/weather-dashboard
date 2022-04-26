@@ -1,10 +1,9 @@
 var apiKey = fb404b43121bd629a943d011c4a84593;
-var today = moment().format("l");
 var searchBtnEl = document.querySelector("#searchBtn");
-var citySearchHistoryEl = [];
 var cityHistoryEl = document.querySelector("#search-history-list");
 var cityEl = document.querySelector("#cityInput");
 var currentForecastEl = document.querySelector("#current-forecast-list");
+var cityTitleEl = document.querySelector("#city-search-name");
 
 // saving cities to localStorage
 var saveCities = JSON.parse(localStorage.getItem("recentCitiesSearched"));
@@ -34,8 +33,84 @@ function showCitySearches() {
 
 var searchedCity = function() {
     var cityName = cityEl.value;
-    currentForecastEl.innerHTML = "";
+    // currentForecastEl.innerHTML = "";
     currentForecastEl(cityName);
     saveCitySearches(cityName);
 }
 
+var getCurrentWeather = function(city) {
+    fetch ("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        var today = moment().format("(MM/DD/YYYY)");
+        var todaysWeather = data.main.temp;
+        var todaysWind = data.wind.speed;
+        var todaysHumidity = data.main.humidity;
+        var todaysLon = data.coord.lon;
+        var todaysLat = data.coord.lat;
+
+        cityTitleEl.innerHTML = city + ", " + today;
+        currentForecastEl.appendChild(cityTitleEl);
+
+        // displaying current weather
+        var currentWeather = document.createElement("p");
+        currentWeather.innerHTML = "Temperature: " + todaysWeather + " C";
+        currentForecastEl.append(currentWeather);
+
+        var currentWind = document.createElement("p");
+        currentWind.innerHTML = "Wind: " + todaysWind + "m/s";
+        currentForecastEl.append(currentWind);
+
+        var currentHumidity = document.createElement("p");
+        currentHumidity.innerHTML = "Humidity: " + todaysHumidity + " %";
+        currentForecastEl.append(currentHumidity);
+
+        // calling UVIndex()
+        UVIndex(todaysLon, todaysLat);
+        cityEl.value = "";
+    });
+};
+
+// getting the UV Index to display in getCurrentWeather()
+var UVIndex = function(lon, lat) {
+    fetch ("https://api.openweathermap.org/data/2.5/onecall?lon=" + lon + "&lat=" + lat + "&exclude=hourly,daily&appid=" + apiKey)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        var currentUVIndex = data.current.uvi;
+        var currentUVIndexEl = document.createElement("p");
+        currentUVIndexEl.innerHTML = "UV Index " + currentUVIndex;
+        currentForecastEl.append(currentUVIndexEl);
+
+        // changing background color to reflect UV Index Severity
+        if (currentUVIndex >= 0 && currentUVIndex <=2) {
+            currentUVIndexEl.style.backgroundColor = "green";
+        } else if (currentUVIndex <= 3 && currentUVIndex <= 5) {
+            currentUVIndexEl.style.backgroundColor = "yellow";
+        } else {
+            currentUVIndexEl.style.backgroundColor = "red";
+        }
+    });
+};
+
+// function to get future 5 day forcast
+var futureForecast = function (lon, lat) {
+    fetch ("https://api.openweathermap.org/data/2.5/forecast?lon=" + lon + "&lat=" + lat + "&appid=" + apiKey + "&units=metric")
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        
+    })
+}
+
+// event listener to display searched cities and weather
+searchBtnEl.addEventListener("click", function() {
+    searchedCity();
+    // call functions for current weather and future weather
+})
+
+// showCitySearches();
