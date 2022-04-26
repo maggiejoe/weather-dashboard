@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,72 +8,64 @@
     <title>Your Weather Dashboard</title>
 
     <!-- Style Sheets -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;800&family=Quicksand:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;800&family=Quicksand:wght@300;700&display=swap"
+        rel="stylesheet">
     <link href="./assets/style.css">
 </head>
 
-<body>
-    <main>
-        <article class="container-fluid">
-            <!-- NavBar -->
-            <nav class="row navbar navbar-light bg-light">
-                <div class="col-12 text-center">
-                    <h1>Your Weather Dashboard</h1>
-                </div>
-            </nav>
+<body class="flex-column min-100-vh">
+    <!-- Header -->
+    <header class="hero">
+            <h1 class="title text-center">Your Weather Dashboard</h1>
+    </header>
 
-            <!-- Search Bar Title -->
-            <section class="row">
-                <div class="col-12">
-                    <h4>Search City:</h4>
+    <main class="flex-row justify-space-between">
+        <section class="col-12 col-md-4">
+            <!-- Search Bar -->
+            <div class="card">
+                <h4 class="card-header text-center">Search City</h4>
+                <form class="card-body" id="form-container">
+                    <label class="form-label" for="cityName">City</label>
+                    <input type="text" id="cityInput" class="form-input" placeholder="Enter City Name">
+                    <button type="submit" id="searchBtn" class="btn">Search</button>
+                </form>
+            </div>
+            <!-- List of searched cities -->
+            <div class="card">
+                <h4 class="card-header text-center">Search History</h4>
+                <div id="search-history-list" class="list-group">
+                    <!-- searched cities history listed here -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Search Bar Input -->
-            <section class="row">
-                <div class="col-12">
-                    <div class="input-group">
-                        <input type="text" id="cityInput" class="form-control" placeholder="Enter City Name">
-                        <button type="button" id="searchBtn" class="btn btn-info">Search</button>
-                    </div>
+        <section id="display-weather" class="col-12 col-md-8">
+            <!-- Todays weather displayed -->
+            <div class="card">
+                <h4 class="subtitle"><span id="city-search-name"></span></h4>
+                <div class="list-group">
+                    <!-- Todays forecast displayed here -->
                 </div>
-            </section>
+            </div>
 
-            <!-- Seach History List -->
-            <section class="row">
-                <div class="col-12">
-                    <!-- list of searched cities -->
-                    <ul id="cityHistory" class="list-group">
-                        <!-- `li` added in js.file -->
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Weather Details -->
-            <section id="weather" class="col-8">
-                <div id="todaysWeather" class="row">
-                    <div id="searchDetails" class="col-12">
-                        <!-- searched city displayed here dynamically through JavaScript -->
-                    </div>
-                </div>
-
-                <div id="futureWeather" class="row">
-                    <div class="col-12">
-                        <h4>5-Day Forecast:</h4>
-                    </div>
-                </div>
-
-                <div id="forecast" class="row">
+            <!-- Future weather displayed -->
+            <div class="card">
+                <h4 class="subtitle">5-Day Forecast</h4>
+                <div class="list-group" id="future-forecast-list">
                     <!-- 5-day forecast displayed here -->
                 </div>
-            </section>
-        </article>
+            </div>
+        </section>
     </main>
+
 
     <!-- Script Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script href="./assets/script.js"></script>
 </body>
+
 </html>
