@@ -19,45 +19,46 @@
 <body class="flex-column min-100-vh">
     <!-- Header -->
     <header class="hero">
-            <h1 class="title text-center">Your Weather Dashboard</h1>
+            <h1 class="title text-white text-center bg-success bg-gradient p-4">Your Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
-        <section class="col-12 col-md-4">
+    <main class="d-flex flex-row justify-content-between">
+        <section class="col-12 col-md-4 p-3">
             <!-- Search Bar -->
-            <div class="card">
-                <h4 class="card-header text-center">Search City</h4>
-                <form class="card-body" id="form-container">
-                    <label class="form-label" for="cityName">City</label>
-                    <input type="text" id="cityInput" class="form-input" placeholder="Enter City Name">
-                    <button type="submit" id="searchBtn" class="btn">Search</button>
-                </form>
-            </div>
-            <!-- List of searched cities -->
-            <div class="card">
-                <h4 class="card-header text-center">Search History</h4>
-                <div id="search-history-list" class="list-group">
-                    <!-- searched cities history listed here -->
+                <div class="card mb-3">
+                    <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">Search City</h4>
+                    <form class="card-body" id="form-container">
+                        <label class="form-label" for="cityName">City</label>
+                        <input type="text" id="cityInput" class="form-control" placeholder="Enter City Name">
+                        <button type="submit" id="searchBtn" class="btn btn-light btn-outline-dark mt-3 col-12">Search</button>
+                    </form>
                 </div>
-            </div>
+                <!-- List of searched cities -->
+                <div class="card">
+                    <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">Search History</h4>
+                    <div id="search-history-list" class="list-group">
+                        <!-- searched cities history listed here -->
+                    </div>
+                </div>
         </section>
 
-        <section id="display-weather" class="col-12 col-md-8">
+        <!-- why doesn't hidden class work when display:none in css -->
+        <section class="hidden col-12 col-md-8 p-3">
             <!-- Todays weather displayed -->
-            <div class="card">
-                <h4 class="subtitle"><span id="city-search-name"></span></h4>
-                <div class="list-group" id="current-forecast-list">
-                    <!-- Todays forecast displayed here -->
+                <div class="card mb-3">
+                    <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">Today's Weather For <span id="city-search-name"></span></h4>
+                    <div class="list-group" id="current-forecast-list">
+                        <!-- Todays forecast displayed here -->
+                    </div>
                 </div>
-            </div>
 
-            <!-- Future weather displayed -->
-            <div class="card">
-                <h4 class="subtitle">5-Day Forecast</h4>
-                <div class="list-group" id="future-forecast-list">
-                    <!-- 5-day forecast displayed here -->
+                <!-- Future weather displayed -->
+                <div class="card">
+                    <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">5-Day Forecast</h4>
+                    <div class="list-group" id="future-forecast-list">
+                        <!-- 5-day forecast displayed here -->
+                    </div>
                 </div>
-            </div>
         </section>
     </main>
 
