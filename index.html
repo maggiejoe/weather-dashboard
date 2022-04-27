@@ -38,7 +38,7 @@
                     <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">Search History</h4>
                     <div class="card-body">
                         <input type="submit" value="Clear History" id="clearBtn" class="btn btn-light btn-outline-dark col-12">
-                        <div id="search-history-list" class="list-group">
+                        <div id="search-history-list" class="list-group mt-3">
                             <!-- searched cities history listed here -->
                         </div>
                     </div>
@@ -58,8 +58,12 @@
                 <!-- Future weather displayed -->
                 <div class="card">
                     <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">5-Day Forecast</h4>
-                    <div class="list-group" id="future-forecast-list">
-                        <!-- 5-day forecast displayed here -->
+                    <div class="row d-none card-group" id="future-forecast">
+                        <div class="bg-success bg-opacity-25" id="dayOne"></div>
+                        <div class="bg-success bg-opacity-25" id="dayTwo"></div>
+                        <div class="bg-success bg-opacity-25" id="dayThree"></div>
+                        <div class="bg-success bg-opacity-25" id="dayFour"></div>
+                        <div class="bg-success bg-opacity-25" id="dayFive"></div>                        
                     </div>
                 </div>
         </section>

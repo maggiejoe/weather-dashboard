@@ -5,6 +5,12 @@ var cityEl = document.querySelector("#cityInput");
 var currentForecastEl = document.querySelector("#current-forecast-list");
 var cityTitleEl = document.querySelector("#city-search-name");
 
+var day1 = document.querySelector("#dayOne");
+var day2 = document.querySelector("#dayTwo");
+var day3 = document.querySelector("#dayThree");
+var day4 = document.querySelector("#dayFour");
+var day5 = document.querySelector("#dayFive");
+
 // saving cities to localStorage
 var saveCities = JSON.parse(localStorage.getItem("recentCitiesSearched")) || [];
 
@@ -20,7 +26,7 @@ function showCitySearches() {
     cityHistoryEl.innerHTML = "";
     for (var historyIndex = 0; historyIndex < saveCities.length; historyIndex++) {
         var recentSearch = document.createElement("li");
-        recentSearch.setAttribute("class", "col-12 mb-2");
+        recentSearch.setAttribute("class", "col-12 mb-2 list-unstyled text-center bg-light p-2 rounded-3");
         recentSearch.textContent = ("cities", saveCities[historyIndex]);
         cityHistoryEl.appendChild(recentSearch);
         recentSearch.addEventListener("click", function(index) {
@@ -94,32 +100,38 @@ var UVIndex = function(lon, lat) {
     });
 };
 
-// function to get future 5 day forcast
-// var futureForecast = function (lon, lat) {
-//     fetch ("https://api.openweathermap.org/data/2.5/forecast?lon=" + lon + "&lat=" + lat + "&appid=" + apiKey + "&units=metric")
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         var futureWeather = data.main.temp;
-//         var futureWind = data.wind.speed;
-//         var futureHumidity = data.main.humidity;
-//     })
-// }
+// // function to get future 5 day forcast
+var futureForecast = function (lon, lat) {
+    fetch ("https://api.openweathermap.org/data/2.5/forecast?lon=" + lon + "&lat=" + lat + "&appid=" + apiKey + "&units=metric")
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        // get date data from moment.js and link it to weather api
+        // get icon data from api
+        // get temp data from api
+        // get humidity data from api
+        // get wind data from api
+
+        // create a loop that cycles through the api data and displays a weather card for 5 days
+    })
+}
 
 // event listener to display searched cities and weather
 searchBtnEl.addEventListener("click", function(event) {
-    if (cityEl === null || cityEl === "") {
-        alert("Please enter a city");
-    }
     event.preventDefault();
+    if (cityEl.value === null || cityEl.value === "") {
+        alert("Please enter a city");
+        return
+    }
     searchedCity();
-    getCurrentForecast();
     // call functions for current weather and future weather
 })
 
 // event listener to clear history
 var clearBtnEl = document.querySelector("#clearBtn");
+
 clearBtnEl.addEventListener("click", function () {
     localStorage.clear();
+    window.location.reload();
 })
