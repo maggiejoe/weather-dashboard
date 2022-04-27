@@ -6,7 +6,7 @@ var currentForecastEl = document.querySelector("#current-forecast-list");
 var cityTitleEl = document.querySelector("#city-search-name");
 
 // saving cities to localStorage
-var saveCities = JSON.parse(localStorage.getItem("recentCitiesSearched"));
+var saveCities = JSON.parse(localStorage.getItem("recentCitiesSearched")) || [];
 
 // turning city searches into a string with JSON
 function saveCitySearches(city) {
@@ -20,13 +20,13 @@ function showCitySearches() {
     cityHistoryEl.innerHTML = "";
     for (var historyIndex = 0; historyIndex < saveCities.length; historyIndex++) {
         var recentSearch = document.createElement("li");
-        recentSearch.setAttribute("class", "col-12");
+        recentSearch.setAttribute("class", "col-12 mb-2");
         recentSearch.textContent = ("cities", saveCities[historyIndex]);
         cityHistoryEl.appendChild(recentSearch);
         recentSearch.addEventListener("click", function(index) {
-            var searchedCity = index.target.textContent;
-            cityEl.value = searchedCity;
-            // call function that displays current weather
+            var searchedCities = index.target.textContent;
+            cityEl.value = searchedCities;
+            getCurrentWeather();
         })
     }
 }
@@ -97,20 +97,22 @@ var UVIndex = function(lon, lat) {
 };
 
 // function to get future 5 day forcast
-var futureForecast = function (lon, lat) {
-    fetch ("https://api.openweathermap.org/data/2.5/forecast?lon=" + lon + "&lat=" + lat + "&appid=" + apiKey + "&units=metric")
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        
-    })
-}
+// var futureForecast = function (lon, lat) {
+//     fetch ("https://api.openweathermap.org/data/2.5/forecast?lon=" + lon + "&lat=" + lat + "&appid=" + apiKey + "&units=metric")
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         var futureWeather = data.main.temp;
+//         var futureWind = data.wind.speed;
+//         var futureHumidity = data.main.humidity;
+//     })
+// }
 
 // event listener to display searched cities and weather
 searchBtnEl.addEventListener("click", function() {
     searchedCity();
+    getCurrentWeather();
     // call functions for current weather and future weather
 })
 
-// showCitySearches();
