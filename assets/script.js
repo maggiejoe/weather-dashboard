@@ -74,6 +74,9 @@ var getCurrentForecast = function(city) {
         // calling UVIndex()
         UVIndex(todaysLon, todaysLat);
         cityEl.value = "";
+
+        // fix getCurrentForecast
+        // if submitButton cilcked again, remove exisiting current weather data and replace it with new weather data
     });
 };
 
@@ -125,7 +128,6 @@ searchBtnEl.addEventListener("click", function(event) {
         return
     }
     searchedCity();
-    // call functions for current weather and future weather
 })
 
 // event listener to clear history
