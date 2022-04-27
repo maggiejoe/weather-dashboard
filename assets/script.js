@@ -1,4 +1,4 @@
-var apiKey = fb404b43121bd629a943d011c4a84593;
+var apiKey = "fb404b43121bd629a943d011c4a84593";
 var searchBtnEl = document.querySelector("#searchBtn");
 var cityHistoryEl = document.querySelector("#search-history-list");
 var cityEl = document.querySelector("#cityInput");
@@ -26,19 +26,18 @@ function showCitySearches() {
         recentSearch.addEventListener("click", function(index) {
             var searchedCities = index.target.textContent;
             cityEl.value = searchedCities;
-            getCurrentWeather();
+            getCurrentForecast(city);
         })
     }
 }
 
 var searchedCity = function() {
     var cityName = cityEl.value;
-    // currentForecastEl.innerHTML = "";
-    currentForecastEl(cityName);
+    getCurrentForecast(cityName);
     saveCitySearches(cityName);
 }
 
-var getCurrentWeather = function(city) {
+var getCurrentForecast = function(city) {
     fetch ("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric")
     .then(function(response) {
         return response.json();
@@ -52,7 +51,6 @@ var getCurrentWeather = function(city) {
         var todaysLat = data.coord.lat;
 
         cityTitleEl.innerHTML = city + ", " + today;
-        currentForecastEl.appendChild(cityTitleEl);
 
         // displaying current weather
         var currentWeather = document.createElement("p");
@@ -110,9 +108,18 @@ var UVIndex = function(lon, lat) {
 // }
 
 // event listener to display searched cities and weather
-searchBtnEl.addEventListener("click", function() {
+searchBtnEl.addEventListener("click", function(event) {
+    if (cityEl === null || cityEl === "") {
+        alert("Please enter a city");
+    }
+    event.preventDefault();
     searchedCity();
-    getCurrentWeather();
+    getCurrentForecast();
     // call functions for current weather and future weather
 })
 
+// event listener to clear history
+var clearBtnEl = document.querySelector("#clearBtn");
+clearBtnEl.addEventListener("click", function () {
+    localStorage.clear();
+})

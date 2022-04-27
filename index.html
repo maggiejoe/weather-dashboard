@@ -30,14 +30,17 @@
                     <form class="card-body" id="form-container">
                         <label class="form-label" for="cityName">City</label>
                         <input type="text" id="cityInput" class="form-control" placeholder="Enter City Name">
-                        <button type="submit" id="searchBtn" class="btn btn-light btn-outline-dark mt-3 col-12">Search</button>
+                        <input type="submit" value="Submit" id="searchBtn" class="btn btn-light btn-outline-dark mt-3 col-12">
                     </form>
                 </div>
                 <!-- List of searched cities -->
-                <div class="card">
+                <div class="card mb-3">
                     <h4 class="card-header text-center bg-success" style="--bs-bg-opacity: .5;">Search History</h4>
-                    <div id="search-history-list" class="list-group">
-                        <!-- searched cities history listed here -->
+                    <div class="card-body">
+                        <input type="submit" value="Clear History" id="clearBtn" class="btn btn-light btn-outline-dark col-12">
+                        <div id="search-history-list" class="list-group">
+                            <!-- searched cities history listed here -->
+                        </div>
                     </div>
                 </div>
         </section>
@@ -66,7 +69,7 @@
     <!-- Script Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script href="./assets/script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 
 </html>
