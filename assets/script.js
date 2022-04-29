@@ -94,6 +94,7 @@ var UVIndex = function(lon, lat) {
 
         // changing background color to reflect UV Index Severity
         if (currentUVIndex >= 0 && currentUVIndex <=2) {
+            // need to fix this so the color is just covering the UV and not the entire line
             currentUVIndexEl.style.backgroundColor = "green";
         } else if (currentUVIndex <= 3 && currentUVIndex <= 5) {
             currentUVIndexEl.style.backgroundColor = "yellow";
@@ -110,13 +111,28 @@ var futureForecast = function (lon, lat) {
         return response.json();
     })
     .then(function (data) {
-        // get date data from moment.js and link it to weather api
-        // get icon data from api
-        // get temp data from api
-        // get humidity data from api
-        // get wind data from api
+        // displaying future forecasts for 5 days
+        // need to turn this data into a for loop\
 
-        // create a loop that cycles through the api data and displays a weather card for 5 days
+        for (futureIndex = 0; futureIndex < 5; futureIndex++) {
+            var futureWeatherData = {
+                date: data.daily[futureIndex].dt,
+                icon: data.daily[futureIndex].weather[0].icon,
+                temp: data.daily[futureIndex].temp.day,
+                humidity: data.daily[futureIndex].humidity,
+                wind: data.daily[futureIndex].wind_speed
+            };
+
+            var date = moment().add(futureWeatherData.date, "d").format("MM/DD/YYYY");
+            var iconURL = "https://openweathermap.org/img/wn/" + futureWeatherData.icon + "@2x.png";
+
+            futureWeatherData.date = document.createElement("h6");
+            futureWeatherData.icon = document.createElement("img");
+            futureWeatherData.temp = document.createElement("p");
+            futureWeatherData.humidity = document.createElement("p");
+            futureWeatherData.wind = document.createElement("p");
+
+        }
     })
 }
 
@@ -127,6 +143,7 @@ searchBtnEl.addEventListener("click", function(event) {
         alert("Please enter a city");
         return
     }
+    currentForecastEl.innerHTML = ""
     searchedCity();
 })
 
@@ -134,6 +151,7 @@ searchBtnEl.addEventListener("click", function(event) {
 var clearBtnEl = document.querySelector("#clearBtn");
 
 clearBtnEl.addEventListener("click", function () {
+    // would like to make this only clear the city history list and not the entire page
     localStorage.clear();
     window.location.reload();
 })
