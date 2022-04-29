@@ -112,8 +112,6 @@ var futureForecast = function (lon, lat) {
     })
     .then(function (data) {
         // displaying future forecasts for 5 days
-        // need to turn this data into a for loop
-
         for (futureIndex = 0; futureIndex < 5; futureIndex++) {
             var futureWeatherData = {
                 date: data.daily[futureIndex].dt,
@@ -126,11 +124,13 @@ var futureForecast = function (lon, lat) {
             var date = moment().add(futureWeatherData.date, "d").format("MM/DD/YYYY");
             var iconURL = "https://openweathermap.org/img/wn/" + futureWeatherData.icon + "@2x.png";
 
-            futureWeatherData.date = document.createElement("h6");
-            futureWeatherData.icon = document.createElement("img");
+            date = document.createElement("h6");
+            iconURL = document.createElement("img");
             futureWeatherData.temp = document.createElement("p");
             futureWeatherData.humidity = document.createElement("p");
             futureWeatherData.wind = document.createElement("p");
+
+            // appendChild ??
 
         }
     })
