@@ -33,6 +33,8 @@ function showCitySearches() {
             var searchedCities = index.target.textContent;
             cityEl.value = searchedCities;
             getCurrentForecast(city);
+
+            // have to fix that when the city in the search is clicked,
         })
     }
 }
@@ -74,9 +76,6 @@ var getCurrentForecast = function(city) {
         // calling UVIndex()
         UVIndex(todaysLon, todaysLat);
         cityEl.value = "";
-
-        // fix getCurrentForecast
-        // if submitButton cilcked again, remove exisiting current weather data and replace it with new weather data
     });
 };
 
@@ -122,15 +121,20 @@ var futureForecast = function (lon, lat) {
             };
 
             var date = moment().add(futureWeatherData.date, "d").format("MM/DD/YYYY");
-            var iconURL = "https://openweathermap.org/img/wn/" + futureWeatherData.icon + "@2x.png";
+            // var iconURL = "https://openweathermap.org/img/wn/" + futureWeatherData.icon + "@2x.png";
+            iconURL = document.setAttribute("src", "https://openweathermap.org/img/wn/" + futureWeatherData.icon + "@2x.png");
 
-            date = document.createElement("h6");
-            iconURL = document.createElement("img");
-            futureWeatherData.temp = document.createElement("p");
-            futureWeatherData.humidity = document.createElement("p");
-            futureWeatherData.wind = document.createElement("p");
+            date = document.createElement("h6").textContent;
+            futureWeatherData.temp = document.createElement("p").textContent;
+            futureWeatherData.humidity = document.createElement("p").textContent;
+            futureWeatherData.wind = document.createElement("p").textContent;
 
-            // appendChild ??
+            // appendChild to day1 -> day5 variables ??
+            date.append(futureIndex);
+            iconURL.append(futureIndex);
+            futureWeatherData.temp.append(futureIndex);
+            futureWeatherData.humidity.append(futureIndex);
+            futureWeatherData.wind.append(futureIndex);
 
         }
     })
