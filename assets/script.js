@@ -112,7 +112,7 @@ var futureForecast = function (lon, lat) {
     })
     .then(function (data) {
         // displaying future forecasts for 5 days
-        // need to turn this data into a for loop\
+        // need to turn this data into a for loop
 
         for (futureIndex = 0; futureIndex < 5; futureIndex++) {
             var futureWeatherData = {
