@@ -6,8 +6,3 @@
 body {
     font-family: 'Quicksand', sans-serif;
 }
-
-/* why isn't this class hidding the section */
-.hidden {
-    display: none;
-}
