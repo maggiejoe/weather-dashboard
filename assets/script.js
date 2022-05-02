@@ -29,7 +29,8 @@ function showCitySearches() {
             cityEl.value = searchedCities;
             getCurrentForecast(city);
 
-            // have to fix that when the city in the search is clicked,
+            // have to fix that when the city in the search is clicked
+            // update the code so that a same searached city only displays once in the history
         })
     }
 }
