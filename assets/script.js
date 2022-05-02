@@ -38,7 +38,6 @@ var searchedCity = function() {
     var cityName = cityEl.value;
     getCurrentForecast(cityName);
     saveCitySearches(cityName);
-
 }
 
 var getCurrentForecast = function(city) {
@@ -54,7 +53,7 @@ var getCurrentForecast = function(city) {
         var todaysLon = data.coord.lon;
         var todaysLat = data.coord.lat;
 
-        // futureForecast(todaysLat, todaysLon);
+        // futureForecast(lat, lon);
 
         cityTitleEl.innerHTML = city + ", " + today;
 
@@ -74,6 +73,8 @@ var getCurrentForecast = function(city) {
         // calling UVIndex()
         UVIndex(todaysLon, todaysLat);
         cityEl.value = "";
+
+        futureForecast(todaysLon, todaysLat);
     });
 };
 
@@ -99,31 +100,6 @@ var UVIndex = function(lon, lat) {
         } else {
             currentUVIndexEl.style.backgroundColor = "red";
         }
-
-        for (var i = 0; i < 5; i++) {
-            var futureDate = new Date (data.daily[i].dt);
-            var futureIcon = data.daily[i].weather[0].icon;
-            var futureTemp = data.daily[i].temp.day;
-            var futureHumidity = data.daily[i].humidity;
-            var futureWind = data.daily[i].wind_speed;
-
-            var date = moment().add(futureDate, "d").format("MM/DD/YYYY");
-            var iconURL = document.setAttribute("src", "https://openweathermap.org/img/wn/" + futureIcon + "@2x.png");
-
-            var fiveDayDiv = document.createElement("div");
-
-            // futureDate = document.createElement("h6");
-            // futureWeather = document.createElement("p");
-            // futureHumidity = document.createElement("p");
-            // futureWind = document.createElement("p");
-
-            fiveDayDiv.appendChild(futureDate);
-
-            fiveDayForecast.appendChild(fiveDayDiv);
-
-            // appendChild to day1 -> day5 variables ??
-            date[i].append(fiveDayForecast);
-        }
     });
 };
 
@@ -136,29 +112,54 @@ var futureForecast = function (lon, lat) {
     })
     .then(function (data) {
         // displaying future forecasts for 5 days
-        for (var i = 0; i < 5; i++) {
-            var futureDate = new Date (data.daily[i].dt);
+        for (var i = 1; i < 6; i++) {
             var futureIcon = data.daily[i].weather[0].icon;
             var futureTemp = data.daily[i].temp.day;
             var futureHumidity = data.daily[i].humidity;
             var futureWind = data.daily[i].wind_speed;
 
-            var date = moment().add(futureDate, "d").format("MM/DD/YYYY");
-            var iconURL = document.setAttribute("src", "https://openweathermap.org/img/wn/" + futureIcon + "@2x.png");
+            // creating date
+            var date = moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
+
+            // putting api weather data into html elements to display on page
+            var iconEl = document.createElement("img");
+            iconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + futureIcon + "@2x.png");
+
+            var cardCol = document.createElement("div");
+            cardCol.setAttribute("class", "col-2 mt-3 mb-3")
 
             var fiveDayDiv = document.createElement("div");
 
-            // futureDate = document.createElement("h6");
-            // futureWeather = document.createElement("p");
-            // futureHumidity = document.createElement("p");
-            // futureWind = document.createElement("p");
+            var futureDateEl = document.createElement("h6");
+            futureDateEl.setAttribute("class", "text-center");
+            futureDateEl.textContent = date;
+            
+            var futureTempEl = document.createElement("p");
+            futureTempEl.setAttribute("class", "text-center");
+            futureTempEl.textContent = "Temp " + futureTemp + " C";
+        
+            var futureHumidityEl = document.createElement("p");
+            futureHumidityEl.setAttribute("class", "text-center");
+            futureHumidityEl.textContent = "Humdity " + futureHumidity + " %";
+            
+            var futureWindEl = document.createElement("p");
+            futureWindEl.setAttribute("class", "text-center");
+            futureWindEl.textContent = "Wind " + futureWind + " km/h";
 
-            fiveDayDiv.appendChild(futureDate);
+            // appending the icon and date element together
+            futureDateEl.appendChild(iconEl);
 
-            fiveDayForecast.appendChild(fiveDayDiv);
+            // appending the columns to the fiveDayDiv container
+            cardCol.appendChild(fiveDayDiv);
 
-            // appendChild to day1 -> day5 variables ??
-            date[i].append(fiveDayForecast);
+            // appending all of the html elements to each card
+            fiveDayDiv.appendChild(futureDateEl);
+            fiveDayDiv.appendChild(futureTempEl);
+            fiveDayDiv.appendChild(futureHumidityEl);
+            fiveDayDiv.appendChild(futureWindEl);
+
+            // appending the entire future forecast group together to each column
+            fiveDayForecast.appendChild(cardCol);
         }
     });
 };
@@ -172,7 +173,6 @@ searchBtnEl.addEventListener("click", function(event) {
     }
     currentForecastEl.innerHTML = ""
     searchedCity();
-    futureForecast();
 })
 
 // event listener to clear history
