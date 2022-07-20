@@ -53,9 +53,14 @@ var getCurrentForecast = function(city) {
         var todaysHumidity = data.main.humidity;
         var todaysLon = data.coord.lon;
         var todaysLat = data.coord.lat;
+        var todaysIcon = data.weather[0].icon;
+
+        // display current weather icon
+        var currentIcon = document.createElement("img");
+        currentIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
+        currentForecastEl.append(currentIcon);
 
         // futureForecast(lat, lon);
-
         cityTitleEl.innerHTML = city + ", " + today;
 
         // displaying current weather
