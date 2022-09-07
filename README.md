@@ -1,58 +1,49 @@
 # Weather Dashboard
 
 
+## Table of Contents
+1. [Description](#description)
+2. [Challenges](#challenges)
+3. [Screenshots](#screenshots)
+4. [Technologies Used](#technologies-used)
+5. [Future Development](#future-development)
+6. [Contributors](#contributors)
+7. [Links](#links)
+
+
 ## Description
 The weather dashboard is an application created to give the user current and future weather data based off of their searched city.
+
 
 ## Challenges
 My biggest challenge was towards the end of the project when I was creating the 'futureForecast()`. I had an issue with findng the right place to call the function but once that was figured out, finishing off that function to get the data on the page dynamically was no problem!
 
-# Screenshots
-This screenshot is a mockup image of what the application should look like
-![](./assets/images/weather-dashboard-mockup.png)
-
-# Deployment Links
-GitHub Link: https://github.com/maggiejoe/weather-dashboard.git
-Deployable Link: https://maggiejoe.github.io/weather-dashboard/
+Currently, my challenge is understanding how I lost code that I wrote to correct nearly all errors that were presented upon deployment. I will be working at correcting these issues once again for a fully funcitoning application without errors.
 
 
-## Challenge #6 Criteria
+## Screenshots
+Here's a screenshot of the main page of this application!
+![](./assets/images/weather-dashboard.png)
 
 
-## Technical Acceptance
-*  :white_check_mark:  Use OpenWeather API 
-to retrieve weather data
-*  :white_check_mark:  Use `localStorage` to store persistent data
-*  :white_check_mark:  When a city is searched, the current and future weather conditions are displayed and listed in a search history section
-*  :white_check_mark:  The following data is displayed when a city is searched
-    *  :white_check_mark:  city name
-    *  :white_check_mark:  date
-    *  :white_check_mark:  icon
-    *  :white_check_mark:  weather conditions
-    *  :white_check_mark:  temperature
-    *  :white_check_mark:  humidity
-    *  :white_check_mark:  wind speed
-    *  :white_check_mark:  UV index
-*  :white_check_mark:  When the UV index is displayed, they are indicated through color to see what the conditions are'
- *  :white_check_mark:  When future conditions are requested from the user, the 5-day forecast displays with the preceeding data
- * When you click on a city in the search bar, then the current weather is displayed for that city
+## Technologies Used
+* HTML
+* CSS
+* JavaScript
 
-## Deployment
 
-*  :white_check_mark: Application Deploys @ live URL
-*  :white_check_mark: Application loads error free
-*  :white_check_mark: GitHub URL submitted
-*  :white_check_mark: GitHub repo contains application code
+## Future Development
+* Add more animation for better an enhanced user experience
+* Use a different API that also has weather animation
+* Update the styling to give a "wow" factor when using the application
 
-## Application Quality
 
-*  :white_check_mark: User experience is intuitive and easy to navigate
-*  :white_check_mark: UI style is clean and polished
-*  :white_check_mark: Application resembles the mock-up functionality provided in the instructions
+## Contributors
+I'm proud to say that I was the sole contributor of this application
 
-## Repository Quality
-*  :white_check_mark: Repo has unique name
-*  :white_check_mark: Repo follows best practices for file structure & naming conventions
-*  :white_check_mark: Repo follows best practices for class/id naming, indentation, quality comments...etc
-*  :white_check_mark: Repo has multiple commit messages
-*  :white_check_mark: Repo has quality README file with descriptions, screenshots & a link to deploy application
+
+# Links
+* **[Repository](https://github.com/maggiejoe/weather-dashboard.git)**
+* **[Live App](https://maggiejoe.github.io/weather-dashboard/)**
+
+
