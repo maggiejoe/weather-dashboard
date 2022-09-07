@@ -23,7 +23,7 @@ Currently, my challenge is understanding how I lost code that I wrote to correct
 
 ## Screenshots
 Here's a screenshot of the main page of this application!
-![](./assets/images/weather-dashboard.png)
+![](./assets/images/weather-dashboard-cropped.png)
 
 
 ## Technologies Used
